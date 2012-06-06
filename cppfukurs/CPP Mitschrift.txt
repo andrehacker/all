@@ -1,0 +1,72 @@
+
+*** CONST ***
+// const does not modify the way it is stored. May be readonly in one method, and writable in another
+const int x;	// Constant variable. Value cannot be changed
+const int* x;	// Pointer to a constant value. Value cannot be changed, pointer can.
+int const* x;	// Similar to previous. const int* x
+// Declarator Operator *const makes pointer const
+int * const x;	// Constant Pointer. Pointer cannot be changed, value can.
+const int * const x;	// Constant Pointer and value
+
+
+*** CPP11 ***
+decltype
+- Determine type of an expression at compile time
+
+*** TEMPLATES ***
+Type Rich Interface => Kann aber nicht explizit sagen, welche Voraussetzungen (z. B. Operator muss überladen sein).
+http://stackoverflow.com/questions/874298/c-templates-that-accept-only-certain-types
+Lösung 1: Über Spezialisierung
+Lösung 2: über BOOST_STATIC_ASSERT(is_base_of<List, T>::value);. "Concepts" wurde verschoben.
+
+// T is the only Template-argument here
+template<typename T>	// <class T> also possible
+T max(T a, T b) {
+	if (a > b) return a;
+	return b;
+}
+
+ ** Definition of Template parameters
+  * Explicit definition of template arguments
+    f<int, float>(0, 3.5);
+  * Implizit (only for functions, does not work based on return value):
+    int x=0; float y = 3.5;
+    f(x,y);
+  * Mixed: int means the first typename 
+    f<int>( (char)0, 3.5F, 7 );
+
+ ** Constant template argument
+   only for constant expression, which is integral or enumerables
+template<int I>
+void print() {
+	cout << i;
+}
+print<5>();
+template <typename T, T dev_val> class Cont {...};}	// Also possible!
+
+ ** Default parameter (only for template classes)
+template<typename T = int>
+struct Pair {
+	T element1;
+	T element2;
+}
+...
+Pair< > pair;	// < > still required
+
+// typename required if we need types that depend from template arguments
+typename vector<T>::iterator it;
+
+** SPECIALIZATION
+* Complete -> Whenever there are no template parameters! template <>
+template < > struct C <char*> {
+	...
+}
+
+* Partial Specialization -> Whenever there are template parameters!
+template <typename T>
+class Dummy <T*> {...}
+
+** Metafunction
+Classes only used to obtain type information. Uses template specialization.
+
+

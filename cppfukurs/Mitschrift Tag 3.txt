@@ -1,0 +1,64 @@
+** Dynamic Memory
+
+HEAP Manager
+
+Slow
+- Solution: Pool Allocators
+
+Memory Leaks
+- auto pointer, smart pointer
+
+Overload new and delete
+- Operators new and and delete call functions "operator new" and "operator delete"
+void * operator new (size_t size, ...);
+void * operator new[] (size_t size, ...);
+
+unique_ptr
+- Unique ownership. Copy constructor deleted!
+
+shared_ptr
+- Problem: Cycle in linked list. Removing root does not cause deletion of other shared pointers
+- Solution: weak_ptr: Have no ownership
+
+
+** Inheritance
+
+Delegation Problem
+- Base class does not know inherited class! Calling a overwritten method from base class does not call the method in the inherited class
+- Solution: virtual void tanken
+
+final (C++11)
+- function may not be overriden
+
+override (C++11)
+- like @override in Java
+
+
+virtual
+- Jedes Objekt einer abgeleiteten Klasse mit virtual erhält Pointer auf VTable
+- Für jeden Funktionsaufruf eine Indirektion (
+- Enthält Adressen für Funktion die tatächlich angesprungen werden sollen
+
+Abstract Base class (similar to java interface)
+- member functions as pure virtual
+  virtual void f() = 0;
+
+inline
+- inline function must be defined in header!
+
+virtual & inline
+- virtual inline void f() {}; Mostly virtual will win and it will not be inline!
+
+
+** Template Subclassing
+template <typename T>
+struct Auto { /* Auto*/ };
+
+struct Solarmobil;
+template <>
+struct Auto <Solarmobil> { /*Solar*/ }
+
+Global function instead of member functions! (See chart)
+- override those. Good, because by overriding the compiler can choose the correct implementation (solves delegation problem)
+
+

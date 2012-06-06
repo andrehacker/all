@@ -1,0 +1,1 @@
+read the short german introduction INSTALL.txt in the folder server.

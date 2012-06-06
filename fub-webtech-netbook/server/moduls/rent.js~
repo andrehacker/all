@@ -1,0 +1,145 @@
+var events = require("events");
+var Invoice = require("./invoice.js");
+module.exports = Rent;
+
+function Rent(mainDb) {
+	this.invoice = new Invoice(mainDb);
+	this.db = mainDb;
+	events.EventEmitter.call(this);
+}
+
+
+// inherit events.EventEmitter
+Rent.super_ = events.EventEmitter;
+//All Methods get the EventEmitter
+Rent.prototype = Object.create(events.EventEmitter.prototype, {
+    constructor: {
+        value: Rent,
+        enumerable: false
+    }
+});
+Rent.prototype.start = function(CustomerId, BikeId) {
+	var self = this;
+	//hat der Customer schon ein Fahrrad ausgeliehen?
+	self.db.Invoice.find({'where': {'CustomerId': CustomerId, 'status': 0}}).on('success', function customerHaveAllreadyAbike(loopupInvoice){
+		if(loopupInvoice == undefined){
+			//nein
+			self.startHelper(self, CustomerId, BikeId);
+		}
+		else{
+			//Ja
+			self.emit('failure', "You can only rent one Bike at the same time.");
+		}
+	}).on('failure', function (){
+		//nein
+		self.startHelper(self, CustomerId, BikeId);
+	});
+}
+Rent.prototype.startHelper = function(self, CustomerId, BikeId) {
+	
+	self.db.Bike.find({'where': {'id': BikeId, 'deleted': false, 'isRented': false}}).on('success', function bikeFound(bike){
+		if(bike == undefined){
+			self.emit('failure', "The selected Bike was not found or is rented allready.");
+		}
+		else{
+			self.db.BikeCat.find({'where': {'id': bike.BikeCatId}}).on('success', function bikeCatFound(bikeCat){
+				self.invoice.on('success', function(invoiceInfo){
+					bike.isRented = true;
+					bike.save();
+					self.emit('success', invoiceInfo);
+				}).on('failure', function (error){
+					self.emit('failure',error);
+				});
+				self.invoice.create(CustomerId, BikeId, bikeCat.id, 0, new Date());
+			}).on('failure', function bikeCatNotFound(){
+				self.emit('failure', "The Bike Category was not found.");
+			});		
+		}
+	}).on('failure', function bikeNotFound(){
+		self.emit('failure', "The selected Bike was not found or is rented allready.");
+	});
+}
+Rent.prototype.end = function(CustomerId) {
+	var self = this;
+    self.db.Invoice.find({ where: {'CustomerId': CustomerId, 'status': 0} }).on('success', function changeRentelEnd(invoice){
+    	if(invoice != undefined){
+    		//setze event listeners
+    		self.invoice.on('success', function(invoiceInfo){
+			    self.db.Bike.find({ where: {'id': invoice.BikeId} }).on('success', function lookupBike(bike){
+					bike.isRented = false;
+					bike.save();
+					self.emit('success', invoiceInfo);
+				}).on('failure', function lookupBikeFailure(){
+					self.emit('failure','The rented Bike was not found in the Database.');	
+				});
+			}).on('failure', function (error){
+				self.emit('failure',error);
+			});
+			//fahrrad zurück geben und auf unbezahlt setzen
+	    	self.invoice.setRentelEnd(invoice.id, new Date() , 1);
+    	}
+    	else{
+    		self.emit('failure', "You currently haven't rented a bike");	
+    	}
+    }).on('failure', function updateFindRentFailure(){
+    	self.emit('failure', "You currently haven't rented a bike");
+    });
+}
+Rent.prototype.getRentelInfo = function(CustomerId) {
+	var self = this;
+	console.log("Start getRentelInfo for Customer " + CustomerId);
+     self.db.Invoice.find({ where: {'CustomerId': CustomerId, 'status': 0} }).on('success', function changeRentelEnd(invoice){
+    	if(invoice != undefined){
+    		self.invoice.on('success', function(invoiceInfo){
+    			self.emit('success', invoiceInfo);	
+    		}).on('failure', function (error){
+    			self.emit('failure',error);
+    		});
+	    	self.invoice.getInvoiceById(invoice.id);
+    	}
+    	else{
+    		self.emit('failure', "You currently haven't rented a bike");	
+    	}
+    }).on('failure', function updateFindRentFailure(){
+    	self.emit('failure', "You currently haven't rented a bike");
+    });
+}
+
+Rent.prototype.getRentById = function(invoiceId) {
+	var self = this;
+    self.invoice.getInvoiceById(invoice.id);
+}
+
+Rent.prototype.webHandel = function(res, req) {
+	var self = this;
+    switch(req.params[1]){
+	    case "info": // just call ajax/Rent/info to get the current satuts of the rentel
+    		self.getRentelInfo(req.session.customer_id);
+    		self.on('success',function customerRentelGetInfoSuccess(invoiceInfo){
+    			res.send(invoiceInfo);
+    		}).on('failure', function ccustomerRentelGetInfoFailure(error){
+    			res.send({'failure' : error});
+    		});
+    	break;
+    	case "start": // call ajax/Rent/start with the Post parameters txtBikeId = #Id
+    		self.start(req.session.customer_id, req.body.txtBikeId);
+    		self.on('success',function customerRentelGetInfoSuccess(invoiceInfo){
+    			res.send(invoiceInfo);
+    		}).on('failure', function ccustomerRentelGetInfoFailure(error){
+    			res.send({'failure' : error});
+    		});
+    	break;
+    	case "end": // just call ajax/Rent/end to end the rentel bike
+    		self.end(req.session.customer_id);
+    		self.on('success',function customerRentelGetInfoSuccess(invoiceInfo){
+    			res.send(invoiceInfo);
+    		}).on('failure', function ccustomerRentelGetInfoFailure(error){
+    			res.send({'failure' : error});
+    		});
+    	break;
+		default:
+			res.send({'failure' : "Rent: Wrong action."});
+    }
+}
+
+

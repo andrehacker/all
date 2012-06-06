@@ -1,0 +1,70 @@
+TODO:
+- C++11 no more parameters by reference, because of move semantics?
+
+
+*** STL
+    Consists of algorithms and containers.
+
+** Concepts
+   Requirements for a template argument, that the argument needs to fullfill (e. g. operators)
+
+** Container
+   copies often
+    
+** Iterators
+   begin() points to first element
+   end() points behind last element
+
+** Vector
+   reserve() improves performance! And solves problems with iterators: Resizing vector while iterating
+   resize(100) will change size to 100 and call default constructor for new elements
+
+** Algorithm
+
+* Remove
+  returns new end, does not change the size. erase changes size efficiently
+  v.erase( remove(v.begin(), v.end(), 99), v.end() );
+  
+  Sort
+  Uses operator<. Also possible to pass compare function
+  sort( vec.begin(), vec.end() );
+  sort( vec.begin(), vec.end(), greater<int>() );	// true if is a is smaller b
+
+** Functors (function objects)
+   overload operator() that makes them act like a function!
+   
+   Predefined functors:
+   plus, multiplies, equal_to, logical_and
+   Adaptors:
+   ptr_fun, mem_fun
+   
+*** HINTS
+
+* Copy Constructor vs assignment
+  C obj;
+  obj = obj2;		// uses assignment operator=
+
+  C obj = obj2;	// uses copy C'tor
+  C obj(obj2);	// equivalent!
+
+* Constructor initializer lists
+  Use copy constructor, instead of assignments in C'tor (default constructors would be called before)!
+  struct C: public A {
+	C(int i): A(i), b(i) {};	// Uses copy constructor, instead of assignments in C'tor (default constructors would be called before)!
+	B b;
+  };
+
+* Prefer ++i instead of i++ because no temporary copy (of old element) is needed!
+
+* Avoid virtual!
+
+* Avoid HEAP (new/delete)
+
+* Prefer memberfunction over global algorithm
+set<int> s;
+i = s.find(123);	// O(log n)
+i = find(s.begin(), s.end(), 123);
+
+* (Always) define copy and assignment constructor
+If we use pointers internally
+

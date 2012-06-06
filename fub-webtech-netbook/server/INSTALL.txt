@@ -1,0 +1,30 @@
+# Voraussetzung
+# MySql Server der auf dem localhost läuft und folgende
+# Einstellungen hat:
+# - Datenbank 'nodejs'
+# - mit den User simon und
+# - den Passwort pw
+# - der Nutzer simon braucht "Administrationsrechte" auf der nodejs Datenbank.
+
+# Der NodeJS Server benötigt folgende Pakte: 
+# mysql, mysql-nativ, lingo, underscore, underscore.string, sequelize, express.
+
+# Wenn der Paket Manager von NodeJs installiert ist kann man folgenden Befehl ausführen:
+% npm install mysql mysql-nativ lingo underscore underscore.string sequelize express
+
+# Start den Server mit folgenden Befehl:
+% node main.js
+
+# Jetzt kann auf die Applikation üer die Adresse
+# http://localhost:3000
+# zugegriffen werden.
+
+
+
+
+****************
+Windows installation of node.js and npm:
+- DONT'T try to install npm in cygwin - not supported!
+- Take node.exe 0.5.8 because 0.6.0 is not supported by npm
+- Follow notes in http://npmjs.org/doc/README.html
+

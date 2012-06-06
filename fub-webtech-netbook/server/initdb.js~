@@ -1,0 +1,104 @@
+var db = require("./moduls/ormapper.js");
+
+//create all tables;
+db.sequelize.sync({force: true}).on('success', function() {
+	
+	// we waited for success event before creating test data!
+	
+	console.log('********');
+	console.log('Database synced successfully!');
+	console.log('********');
+	
+	//add new user
+	var user = db.Customer.build({name: "simon", password: "pw", address: "Castingallee, Berlin", isAdmin: true});
+	user.save().on('success', function () {
+		//find user
+		db.Customer.find({ where: {name: 'simon'} }).on('success', function(result) {
+			console.log('Das ist der User: ' + result.name + ' mit dem Passwort: ' + result.password)	
+		});
+		//find user
+		db.Customer.find(1).on('success', function(result) {
+			console.log('Das ist der User: ' + result.name + ' mit dem Passwort: ' + result.password)	
+		});
+
+		db.Customer.count().on('success', function(c) {
+		  console.log("There are " + c + " projects!")
+		});
+	});
+	
+	var catCity = db.BikeCat.build( {
+		name: 'City',
+		description: 'Comfortable bikes',
+		price: 5,
+		deleted: false
+	});
+	catCity.save().on('success', function (cat) {
+		var bike = db.Bike.build( {
+			name: 'Pegasus Comfort',
+			description: '9-speed gearing, very comfortable!',
+			img_url: 'img/bike_city.jpg',
+			position_lat: '52.51',
+			position_long: '13.43',
+			deleted: false,
+			BikeCatId: cat.id
+		});
+		bike.save();
+	});
+	
+	
+	var catMTB = db.BikeCat.build( {
+		name: 'MTB',
+		description: 'For on- and off-road. Pretty slow and heavy bikes, but very robust.',
+		price: 9,
+		deleted: false
+	});
+	catMTB.save().on('success', function(cat) {
+		var bike = db.Bike.build( {
+			name: 'Stevens Moutain Star',
+			description: 'Full suspension, perfect for the hills of berlin',
+			img_url: 'img/bike_mtb.jpg',
+			position_lat: '52.456',
+			position_long: '13.297',
+			deleted: false,
+			BikeCatId: cat.id
+		});
+		bike.save();
+	});
+	
+	var catRacer = db.BikeCat.build( {
+		name: 'Racer',
+		description: 'Very light and fast bikes. For the street only!',
+		price: 12,
+		deleted: false
+	});
+	catRacer.save().on('success', function(cat) {
+		var bike = db.Bike.build( {
+			name: 'GT Jan Ullrich Edition',
+			description: 'High end Carbon racing bike<br>Jan Ullrich edition',
+			img_url: 'img/bike_racer.jpg',
+			position_lat: '52.53',
+			position_long: '13.43',
+			deleted: false,
+			BikeCatId: cat.id
+		});
+		bike.save();
+		
+		var bike2 = db.Bike.build( {
+			name: 'GT Jan Ullrich Edition',
+			description: 'High end Carbon racing bike<br>Jan Ullrich edition',
+			img_url: 'img/bike_racer.jpg',
+			position_lat: '52.505',
+			position_long: '13.43',
+			deleted: false,
+			BikeCatId: cat.id
+		});
+		bike2.save();
+	});
+	
+}).on('failure', function(error) {
+	console.log('Error creating the database: ' + error);
+});
+
+
+
+

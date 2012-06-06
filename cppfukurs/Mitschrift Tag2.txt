@@ -1,0 +1,61 @@
+** Const
+// Read declaration from right to left!
+char * const test;	// const pointer to char
+const char * test;	// pointer to const char
+char const * test;	// pointer to const char
+// Cannot assign a const type to an unrestricted type
+const int* p1;
+int* p2 = &p1;	// error! Needs explicite type conversion
+
+
+*** TODO:
+- Const
+- F 30!
+
+*** Inheritance and Casting
+
+class C: A, B {}
+
+
+** Explizite Cast
+// typical cast for inheritance, mostly used, similar to
+static_cast
+
+// Rarly used. Leaves pointer unchanged, reinterprete
+reinterpret_cast
+
+// removes const
+const_cast
+
+// Compute at runtime if cast is possible
+dynamic_cast
+
+** Implicite Cast
+// Standard convert
+array -> pointer
+function -> pointer
+
+// qualification conversion. Rule because otherwise there would be a leak
+
+// Integral. Short int->int, signed<->unsigned, enum->int
+
+** User defined conversion: 
+// Constructor
+
+// Assignment operator
+Attention: This is assignment operator
+Complex c;
+c = 17.5;
+... and this is constructor call (not assignment!)
+Complex c = 17.5;
+
+// Conversion function: TODO
+struct B {
+	operator A() const {...}
+}
+
+** Function overloading
+Overload resolution: F36 All functions f are hidden (verdeckt) by the f in the namespace
+Koenig lookup: very special case (convenience)
+
+
