@@ -1,5 +1,3 @@
-#include "globalhotkey.h"
-#include "mainwindow.h"
 #include <iostream>
 #include <string>
 #include <functional>
@@ -7,6 +5,8 @@
 #include <QMainWindow>
 #include <QAbstractEventDispatcher>
 #include <QtDebug>
+#include "globalhotkey.h"
+#include "mainwindow.h"
 
 // WINDOWS Hotkey API
 const unsigned int kKeyF = 0x46;

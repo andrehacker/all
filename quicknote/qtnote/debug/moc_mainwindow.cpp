@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Mon 6. Aug 09:28:43 2012
+** Created: Fri 17. Aug 13:06:53 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,14 +32,24 @@ static const uint qt_meta_data_MainWindow[] = {
 
  // slots: signature, parameters, type, tag, flags
       12,   11,   11,   11, 0x08,
-      37,   21,   11,   11, 0x08,
+      31,   11,   11,   11, 0x08,
+      54,   11,   11,   11, 0x08,
+      97,   77,   11,   11, 0x08,
+     151,   11,   11,   11, 0x08,
+     179,  174,   11,   11, 0x08,
+     226,  210,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
-    "MainWindow\0\0Press1()\0keyId,modifiers\0"
-    "HotKeyPressedSlot(uint,uint)\0"
+    "MainWindow\0\0buttonNewClicked()\0"
+    "buttonOptionsClicked()\0resultCurrentChanged()\0"
+    "selected,deselected\0"
+    "resultSelectionChanged(QItemSelection,QItemSelection)\0"
+    "titleEditingFinished()\0text\0"
+    "lineSearchTextChanged(QString)\0"
+    "keyId,modifiers\0HotKeyPressedSlot(uint,uint)\0"
 };
 
 void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -48,8 +58,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_ASSERT(staticMetaObject.cast(_o));
         MainWindow *_t = static_cast<MainWindow *>(_o);
         switch (_id) {
-        case 0: _t->Press1(); break;
-        case 1: _t->HotKeyPressedSlot((*reinterpret_cast< uint(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2]))); break;
+        case 0: _t->buttonNewClicked(); break;
+        case 1: _t->buttonOptionsClicked(); break;
+        case 2: _t->resultCurrentChanged(); break;
+        case 3: _t->resultSelectionChanged((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
+        case 4: _t->titleEditingFinished(); break;
+        case 5: _t->lineSearchTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 6: _t->HotKeyPressedSlot((*reinterpret_cast< uint(*)>(_a[1])),(*reinterpret_cast< uint(*)>(_a[2]))); break;
         default: ;
         }
     }
@@ -78,6 +93,8 @@ void *MainWindow::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_MainWindow))
         return static_cast<void*>(const_cast< MainWindow*>(this));
+    if (!strcmp(_clname, "AbstractView"))
+        return static_cast< AbstractView*>(const_cast< MainWindow*>(this));
     return QMainWindow::qt_metacast(_clname);
 }
 
@@ -87,9 +104,9 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 7;
     }
     return _id;
 }
