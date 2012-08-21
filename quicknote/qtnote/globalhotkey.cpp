@@ -14,16 +14,16 @@ const unsigned int kKeyG = 0x47;
 // keeping item pressed (auto repeat) will not invoke multiple hotkey notifications
 const unsigned int kMOD_NOREPEAT = 0x4000;
 
-GlobalHotKey *GlobalHotKey::instance = 0;
-QAbstractEventDispatcher::EventFilter GlobalHotKey::prevEventFilter = 0;
+GlobalHotKey *GlobalHotKey::instance_ = 0;
+QAbstractEventDispatcher::EventFilter GlobalHotKey::prevEventFilter_ = 0;
 
 GlobalHotKey::GlobalHotKey() {
-    instance = this;
+    instance_ = this;
 }
 
 // Inspired by http://code.google.com/p/shotscreens/source/browse/cppclient/core/globalshortcut.cpp?r=75670c87e304900afaf1fe0cff6981b2ad4ebbb5
 // and https://github.com/sboli/twmn/blob/master/twmnd/shortcutgrabber.cpp
-bool GlobalHotKey::Register(WId handle) {
+bool GlobalHotKey::registerHotkeys(WId handle) {
 
     bool ok;
     ok = RegisterHotKey(
@@ -39,13 +39,13 @@ bool GlobalHotKey::Register(WId handle) {
         kKeyG);
 
     // Create filter to receive Hotkey messages
-    prevEventFilter = QAbstractEventDispatcher::instance()->setEventFilter(
-        GlobalHotKey::EventFilter);
+    prevEventFilter_ = QAbstractEventDispatcher::instance()->setEventFilter(
+        GlobalHotKey::eventFilter);
 
     return ok;
 }
 
-bool GlobalHotKey::EventFilter(void *message) {
+bool GlobalHotKey::eventFilter(void *message) {
     // The event filter function should return true if the message should be filtered, (i.e. stopped).
     // It should return false to allow processing the message to continue.
     
@@ -53,9 +53,9 @@ bool GlobalHotKey::EventFilter(void *message) {
     if (msg->message == WM_HOTKEY)
     {
         //Ui::MainWindow::sui->textEditLog->appendPlainText("Received begin");
-        if (instance) {
+        if (instance_) {
             qDebug() << "Signaled HotKeyPressed. key: " << HIWORD(msg->lParam) << " mod: " << LOWORD(msg->lParam);
-            emit instance->HotKeyPressed(HIWORD(msg->lParam), LOWORD(msg->lParam));
+            emit instance_->hotKeyPressed(HIWORD(msg->lParam), LOWORD(msg->lParam));
         }
         //sui->textEditLog->appendPlainText("WM_HOTKEY message received");
         /*

@@ -14,7 +14,10 @@ SqliteQuery::~SqliteQuery() {
     sqlite3_finalize(preparedStatement_);
 }
 
-const std::string SqliteQuery::getStringField(int fieldIndex, const std::string nullValue) {
+const std::string SqliteQuery::getStringField(int fieldIndex, const std::string &nullValue) {
+    if (fieldIndex < 0) {
+        return nullValue;
+    }
     if (getFieldDataType(fieldIndex) == SQLITE_NULL) {
         return nullValue;
     } else {
@@ -24,13 +27,16 @@ const std::string SqliteQuery::getStringField(int fieldIndex, const std::string 
     }
 }
 
-const std::string SqliteQuery::getStringField(const std::string fieldName, const std::string nullValue)
+const std::string SqliteQuery::getStringField(const std::string &fieldName, const std::string &nullValue)
 {
     int fieldIndex = getFieldIndexByName(fieldName);
     return getStringField(fieldIndex, nullValue);
 }
 
 int SqliteQuery::getIntField(int fieldIndex, const int nullValue) {
+    if (fieldIndex < 0) {
+        return nullValue;
+    }
     if (getFieldDataType(fieldIndex) == SQLITE_NULL) {
         return nullValue;
     } else {
@@ -38,7 +44,7 @@ int SqliteQuery::getIntField(int fieldIndex, const int nullValue) {
     }
 }
 
-int SqliteQuery::getIntField(const std::string fieldName, const int nullValue)
+int SqliteQuery::getIntField(const std::string &fieldName, const int nullValue)
 {
     int fieldIndex = getFieldIndexByName(fieldName);
     return getIntField(fieldIndex, nullValue);
@@ -73,6 +79,7 @@ int SqliteQuery::getFieldIndexByName(const std::string &name)
             return index;
         }
     }
+    qDebug() << "Field " << name.c_str() << " not found";
     return -1;
 }
 

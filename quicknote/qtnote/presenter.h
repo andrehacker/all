@@ -3,32 +3,37 @@
 
 #include <memory>
 #include "databaseconnection.h"
+#include "notesmanager.h"
+#include "tagsmanager.h"
 
 class AbstractView;
 
 class Presenter
 {
 public:
-    Presenter(DatabaseConnection &db, AbstractView &view);
+    Presenter();
     Presenter& operator=(const Presenter&) = delete;    // disallow copy/assignment
     Presenter(const Presenter&) = delete;    // disallow copy
 
     void optionsClicked();
     void newNoteClicked();
 
-    void searchTextChanged(std::string text);
+    void searchTextChanged(const std::string &text);
 
-    void titleEditingFinished(NoteModel &changedNote);
-    void contentEditingFinished(NoteModel &changedNote);
+    void titleEditingFinished(NoteDto &changedNote);
+    void tagsEditingFinished(NoteDto &changedNote);
+    void contentEditingFinished(NoteDto &changedNote);
 
-    void deleteNote(NoteModel &note);
+    void deleteNote(const NoteDto &note);
 
     void resultSelectionChanged();
     void tagSelectionChanged();
 
 private:
-    AbstractView &view_; // dependency, not in our ownership
-    DatabaseConnection &db_; // dependency, not in our ownership
+    std::unique_ptr<AbstractView> view_;
+    DatabaseConnection db_;
+    NotesManager notesManager_;
+    TagsManager tagsManager_;
 };
 
 #endif // PRESENTER_H

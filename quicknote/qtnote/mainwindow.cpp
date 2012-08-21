@@ -1,25 +1,26 @@
 #include <sstream>
+#include <vector>
 #include <QStringListModel>
 #include <QStringList>
 #include <QDebug>
 #include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "stringlistmodel.h"
+#include "tagsuimodel.h"
 #include "globalhotkey.h"
 #include "presenter.h"
 
 Ui::MainWindow *MainWindow::sui = 0;
 
 // TODO: Tray icon: http://qt-project.org/doc/qt-4.8/desktop-systray.html
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(Presenter &presenter, QWidget *parent) :
     QMainWindow(parent),
+    presenter_(presenter),
     ui_(new Ui::MainWindow),
     tagsStringList_(),
     tagsUiModel_(tagsStringList_),
     notesUiModel_()
 {
-    // Attention: pointer to presenter may not be used in constructor. It is set afterwards.
     ui_->setupUi(this);
     sui = ui_;   // static version of ui for globalhotkey eventhandler
 
@@ -43,15 +44,19 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(resultCurrentChanged()));
     connect(ui_->listResult->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this, SLOT(resultSelectionChanged(const QItemSelection &, const QItemSelection &)));
+    connect(ui_->listTags->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+            this, SLOT(tagsSelectionChanged(const QItemSelection &, const QItemSelection &)));
     connect(ui_->lineTitle, SIGNAL(editingFinished()),
             this, SLOT(titleEditingFinished()));
+    connect(ui_->lineTags, SIGNAL(editingFinished()),
+            this, SLOT(tagsEditingFinished()));
     // Set Event filter to get QFocusEvent for content field and for other events
     // This way we can avoid to subclass QPlainTextEdit
     ui_->textContent->installEventFilter(this);
     ui_->listResult->installEventFilter(this);
 
     // Register Global Hotkeys
-    if (globalHotKey_.Register(this->winId())) {
+    if (globalHotKey_.registerHotkeys(this->winId())) {
         qDebug("Registered Hotkeys");
     } else {
         qDebug("Error registering Hotkeys");
@@ -71,10 +76,10 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     if (event->type() == QEvent::FocusOut && object == ui_->textContent) {
         // So inform Presenter about changed content
         if (ui_->textContent->document()->isModified()) {
-            NoteModel note = getSelectedNote();
+            NoteDto note = getSelectedNote();
             note.setContent(ui_->textContent->toPlainText().toStdString());
 
-            presenter_->contentEditingFinished(note);
+            presenter_.contentEditingFinished(note);
 
             ui_->textContent->document()->setModified(false);
         }
@@ -84,8 +89,8 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
         qDebug("Ate key press %d", keyEvent->key());
         if (keyEvent->key() == Qt::Key_Delete) {
             // Delete selected Note
-            NoteModel note = getSelectedNote();
-            presenter_->deleteNote(note);
+            NoteDto note = getSelectedNote();
+            presenter_.deleteNote(note);
             return true;
         }
     }
@@ -108,40 +113,67 @@ void MainWindow::resultSelectionChanged(const QItemSelection &selected, const QI
     if (selected.isEmpty()) {
         // List was cleared (either before adding new items, or because search has no result)
         ui_->lineTitle->setText("");
+        ui_->lineTags->setText("");
         ui_->textContent->setPlainText("");
     } else {
         // User selected any item or search result was updated => Update content/title
-        // Get selected item
-        NoteModel tempNote = notesUiModel_.getNote(selected.indexes().first());
+        NoteDto tempNote = notesUiModel_.getNote(selected.indexes().first());
         ui_->textContent->setPlainText(
                     QString::fromStdString(tempNote.getContent()));
         ui_->lineTitle->setText(
                     QString::fromStdString(tempNote.getTitle()));
-
+        ui_->lineTags->setText(
+                    QString::fromStdString(tempNote.getTags()));
     }
 }
 
+void MainWindow::tagsSelectionChanged(const QItemSelection &selected, const QItemSelection &deselected) {
+
+    // TODO: This is not called when a user has two tags selected, and then selects the last of the two tags only
+    // (because the currently selected tag does not change)
+    // Inform Presenter. He must load the notes according to the users selection
+    presenter_.tagSelectionChanged();
+}
+
+std::vector<TagDto> MainWindow::getSelectedTags() {
+    std::vector<TagDto> tags;
+    for (int i=0; i<ui_->listTags->selectionModel()->selectedIndexes().size(); ++i) {
+        tags.push_back(tagsUiModel_.getTag(ui_->listTags->selectionModel()->selectedIndexes().at(i)));
+    }
+    return tags;
+}
+
 void MainWindow::buttonNewClicked() {
-    presenter_->newNoteClicked();
+    presenter_.newNoteClicked();
 }
 
 void MainWindow::buttonOptionsClicked() {
-    presenter_->optionsClicked();
+    presenter_.optionsClicked();
 }
 
 void MainWindow::lineSearchTextChanged(const QString & text) {
-    presenter_->searchTextChanged(text.toStdString());
+    presenter_.searchTextChanged(text.toStdString());
 }
 
 void MainWindow::titleEditingFinished() {
     if (ui_->lineTitle->isModified()) {
-
-        NoteModel note = getSelectedNote();
+        NoteDto note = getSelectedNote();
         note.setTitle(ui_->lineTitle->text().toStdString());
 
-        presenter_->titleEditingFinished(note);
+        presenter_.titleEditingFinished(note);
 
         ui_->lineTitle->setModified(false);
+    }
+}
+
+void MainWindow::tagsEditingFinished() {
+    if (ui_->lineTags->isModified()) {
+        NoteDto note = getSelectedNote();
+        note.setTags(ui_->lineTags->text().toStdString());
+
+        presenter_.tagsEditingFinished(note);
+
+        ui_->lineTags->setModified(false);
     }
 }
 
@@ -161,10 +193,6 @@ void MainWindow::HotKeyPressedSlot(uint keyId, uint modifiers) {
     ui_->lineSearch->setFocus();
 }
 
-void MainWindow::setPresenter(Presenter *presenter) {
-    presenter_ = presenter;
-}
-
 std::string MainWindow::getSearchFilter() {
     return ui_->lineSearch->text().toStdString();
 }
@@ -175,7 +203,7 @@ void MainWindow::setSearchFilter(const std::string &text) {
     }
 }
 
-void MainWindow::addNewNote(NoteModel &newNote) {
+void MainWindow::addNewNote(NoteDto &newNote) {
     // Add note at beginning
     notesUiModel_.addNoteAt(0, newNote);
 
@@ -184,7 +212,7 @@ void MainWindow::addNewNote(NoteModel &newNote) {
     ui_->lineTitle->setFocus();
 }
 
-void MainWindow::updateNotes(const std::vector<NoteModel> &notes) {
+void MainWindow::updateNotes(const std::vector<NoteDto> &notes) {
     notesUiModel_.removeRows(0, notesUiModel_.rowCount());
 
     if (notes.size() > 0) {
@@ -197,7 +225,17 @@ void MainWindow::updateNotes(const std::vector<NoteModel> &notes) {
     }
 }
 
-void MainWindow::updateNote(const NoteModel &note) {
+void MainWindow::updateTags(const std::vector<TagDto> &tags) {
+    tagsUiModel_.removeRows(0, tagsUiModel_.rowCount());
+
+    if (tags.size() > 0) {
+        for (auto it = tags.begin(); it != tags.end(); ++it) {
+            tagsUiModel_.append(it->getName().c_str());
+        }
+    }
+}
+
+void MainWindow::updateNote(const NoteDto &note) {
     // Find the index of the note in result list and update list model
     notesUiModel_.updateNoteAt(notesUiModel_.getIndexByNote(note), note);
 
@@ -206,7 +244,7 @@ void MainWindow::updateNote(const NoteModel &note) {
     // or if the GUI does not update itself properly
 }
 
-void MainWindow::deleteNote(const NoteModel &note) {
+void MainWindow::deleteNote(const NoteDto &note) {
     // Find the index of the note in result list and update list model
     notesUiModel_.removeRow(notesUiModel_.getIndexByNote(note).row());
 }
@@ -227,7 +265,7 @@ void MainWindow::selectNoteByRow(int row) {
     selectionModel->select(notesUiModel_.index(row,0), QItemSelectionModel::Select);
 }
 
-NoteModel MainWindow::getSelectedNote() {
+NoteDto MainWindow::getSelectedNote() {
     // TODO: Make this nullptr safe!
     return notesUiModel_.getNote(ui_->listResult->selectionModel()->selectedIndexes().first());
 }

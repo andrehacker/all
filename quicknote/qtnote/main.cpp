@@ -1,8 +1,8 @@
+#include <QtGui/QApplication>
+#include <QDebug>
 #include <iostream>
 #include <string>
 #include <memory>
-#include <QtGui/QApplication>
-#include <QDebug>
 #include "textfilelogger.h"
 #include "databaseconnection.h"
 #include "mainwindow.h"
@@ -24,15 +24,11 @@ int main(int argc, char *argv[])
     qDebug() << "";
     qDebug() << "Program started";
 
-    // Init Database
-    DatabaseConnection db;
-
     // Init qt-application (required for the view)
     QApplication a(argc, argv);
-    MainWindow mainWindow;
 
     // Init Presenter (MVP). Presenter will init the View (MainWindow)
-    Presenter presenter(db, mainWindow);
+    Presenter presenter;
 
     return a.exec();
 }

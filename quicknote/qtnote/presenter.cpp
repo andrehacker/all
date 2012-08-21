@@ -1,67 +1,89 @@
 #include <vector>
 #include <algorithm>
+#include <QDebug>
 #include "presenter.h"
 #include "abstractview.h"
+#include "mainwindow.h"
 
-Presenter::Presenter(DatabaseConnection &db, AbstractView &view) :
-    view_(view),
-    db_(db)
-{
-    view_.setPresenter(this);
-    view_.showWindow();
+Presenter::Presenter() :
+    db_(),
+    notesManager_(db_),
+    tagsManager_(db_) {
+
+    // Init Database
+    if (! db_.openExisting()) {
+        // This is the first start. Create db file and tables
+        db_.createDatabaseAndOpen();
+        notesManager_.createTable();
+        tagsManager_.createTable();
+    }
+
+    // Create View. Done here because we need to pass a pointer to presenter.
+    view_ = std::unique_ptr<AbstractView>(new MainWindow(*this));
+    view_->showWindow();
 
     // Populate GUI with initial data
-    std::vector<NoteModel> notes = db_.getNoteTable().getAll();
-    view_.updateNotes(notes);
+    std::vector<NoteDto> notes = notesManager_.getNotes();
+    view_->updateNotes(notes);
+
+    std::vector<TagDto> tags = tagsManager_.getAll();
+    view_->updateTags(tags);
 
     // TODO: Subscribe to model for changes (e.g. after sync). Update UI afterwards
 }
 
-
 void Presenter::optionsClicked() {
-    view_.showInfoMessageBox("Not yet implemented");
+    view_->showInfoMessageBox("Not yet implemented");
 }
 
 void Presenter::newNoteClicked() {
     // Remove search filter (if existing)
-    view_.setSearchFilter("");
+    view_->setSearchFilter("");
 
     // Add (empty) new note to model.
     // Passed note will be populated with new id
-    NoteModel newNote(-1, "", "");
-    db_.getNoteTable().addNote(newNote);
+    NoteDto newNote(-1, "", "", "");
+    notesManager_.add(newNote);
 
     // Update the UI-Mode (add new node at beginning and select)
-    view_.addNewNote(newNote);
+    view_->addNewNote(newNote);
 }
 
-void Presenter::searchTextChanged(std::string text) {
-    std::vector<NoteModel> notes = db_.getNoteTable().getNotesByText(text);
-    view_.updateNotes(notes);
+void Presenter::searchTextChanged(const std::string &text) {
+    std::vector<NoteDto> notes = notesManager_.getNotes(text, view_->getSelectedTags());
+    view_->updateNotes(notes);
 }
 
-void Presenter::titleEditingFinished(NoteModel &changedNote) {
+void Presenter::titleEditingFinished(NoteDto &changedNote) {
     // Update Title in Model
-    db_.getNoteTable().updateNote(changedNote);
+    notesManager_.update(changedNote);
 
     // Update UI-Model (new title)
-    view_.updateNote(changedNote);
+    view_->updateNote(changedNote);
 }
 
-void Presenter::contentEditingFinished(NoteModel &changedNote) {
+void Presenter::tagsEditingFinished(NoteDto &changedNote) {
+    // Update Tags in Model
+    notesManager_.update(changedNote);
+
+    // Update UI-Model
+    view_->updateNote(changedNote);
+}
+
+void Presenter::contentEditingFinished(NoteDto &changedNote) {
     // Update Content in Model
-    db_.getNoteTable().updateNote(changedNote);
+    notesManager_.update(changedNote);
 
     // Update UI-Model (new content)
-    view_.updateNote(changedNote);
+    view_->updateNote(changedNote);
 }
 
-void Presenter::deleteNote(NoteModel &note) {
+void Presenter::deleteNote(const NoteDto &note) {
     // Mark as deleted in Model
-    db_.getNoteTable().deleteNote(note);
+    notesManager_.remove(note);
 
     // Update UI
-    view_.deleteNote(note);
+    view_->deleteNote(note);
 }
 
 void Presenter::resultSelectionChanged() {
@@ -70,6 +92,12 @@ void Presenter::resultSelectionChanged() {
 
 void Presenter::tagSelectionChanged() {
     // TODO
+    std::vector<TagDto> selectedTags = view_->getSelectedTags();
+    qDebug() << "Selected Tags: " << selectedTags.size();
+
+    // Update search result according to selected tags and search filter
+    std::vector<NoteDto> notes = notesManager_.getNotes(view_->getSearchFilter(),selectedTags);
+    view_->updateNotes(notes);
 }
 
 

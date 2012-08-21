@@ -4,8 +4,8 @@
 
 std::ofstream TextFileLogger::logfile;
 
-TextFileLogger::TextFileLogger(const char *filename) {
-	logfile.open(filename, std::ios::out | std::ios::app);
+TextFileLogger::TextFileLogger(const std::string &filename) {
+    logfile.open(filename.c_str(), std::ios::out | std::ios::app);
 }
 
 TextFileLogger::~TextFileLogger() {

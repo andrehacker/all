@@ -16,25 +16,25 @@ QVariant NotesUiModel::data(const QModelIndex &index, int role) const {
         return QVariant();
 
     if (role == Qt::DisplayRole) {
-        NoteModel note = notes_.at(index.row());
+        // TODO: Test, whether this (access by row) works for a sorted list
+        NoteDto note = notes_.at(index.row());
         return QString::fromStdString(note.getTitle());
     } else {
         return QVariant();
     }
 }
 
-NoteModel NotesUiModel::getNote(const QModelIndex &index) {
+NoteDto NotesUiModel::getNote(const QModelIndex &index) {
     if (!index.isValid())
-        return NoteModel();
+        return NoteDto();
 
     if (index.row() >= static_cast<int>(notes_.size()))
-        return NoteModel();
+        return NoteDto();
 
     return notes_.at(index.row());
 }
 
-Qt::ItemFlags NotesUiModel::flags(const QModelIndex &index) const
-{
+Qt::ItemFlags NotesUiModel::flags(const QModelIndex &index) const {
     if (!index.isValid())
         return Qt::ItemIsEnabled;
 
@@ -42,10 +42,9 @@ Qt::ItemFlags NotesUiModel::flags(const QModelIndex &index) const
 }
 
 bool NotesUiModel::setData(const QModelIndex &index,
-                              const QVariant &value, int role)
-{
+                              const QVariant &value, int role) {
     if (index.isValid() && role == Qt::EditRole) {
-        notes_.at(index.row()) = value.value<NoteModel>();
+        notes_.at(index.row()) = value.value<NoteDto>();
         emit dataChanged(index, index);
         return true;
     }
@@ -55,7 +54,7 @@ bool NotesUiModel::setData(const QModelIndex &index,
 bool NotesUiModel::insertRows(int position, int rows, const QModelIndex &index) {
     beginInsertRows(QModelIndex(), position, position+rows-1);
 
-    NoteModel *emptyNote = new NoteModel;
+    NoteDto *emptyNote = new NoteDto;
     for (int row = 0; row < rows; ++row) {
         notes_.insert(notes_.begin()+position, rows, *emptyNote);
     }
@@ -77,22 +76,22 @@ bool NotesUiModel::removeRows(const int position, const int rows, const QModelIn
     return true;
 }
 
-void NotesUiModel::addNoteAt (const int position, const NoteModel &note) {
+void NotesUiModel::addNoteAt (const int position, const NoteDto &note) {
     insertRows(position, 1);
     setData(index(position), QVariant::fromValue(note));
 }
 
-void NotesUiModel::append (const NoteModel &note) {
+void NotesUiModel::append (const NoteDto &note) {
     addNoteAt(rowCount(), note);
 }
 
-void NotesUiModel::updateNoteAt (const QModelIndex &noteIndex, const NoteModel &note) {
+void NotesUiModel::updateNoteAt (const QModelIndex &noteIndex, const NoteDto &note) {
     if (noteIndex.isValid()) {
         setData(noteIndex, QVariant::fromValue(note));
     }
 }
 
-QModelIndex NotesUiModel::getIndexByNote(const NoteModel &note) {
+QModelIndex NotesUiModel::getIndexByNote(const NoteDto &note) {
     for (int row=0; row < rowCount(); ++row ) {
         if (getNote(index(row)).getId() == note.getId()) {
             return index(row);

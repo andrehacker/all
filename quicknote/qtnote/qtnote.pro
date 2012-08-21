@@ -8,28 +8,36 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 # Input
-HEADERS += abstractview.h mainwindow.h textfilelogger.h stringlistmodel.h sqlite3.h \
+HEADERS += abstractview.h mainwindow.h textfilelogger.h sqlite3.h \
     sqlite.h \
     sqlitetable.h \
-    notemodel.h \
-    tagmodel.h \
     notetable.h \
     databaseconnection.h \
     sqlitequery.h \
     presenter.h \
     globalhotkey.h \
-    notesuimodel.h
+    notesuimodel.h \
+    notesmanager.h \
+    notedto.h \
+    tagdto.h \
+    tagtable.h \
+    tagsmanager.h \
+    tagsuimodel.h
 FORMS += mainwindow.ui
-SOURCES += globalhotkey.cpp main.cpp mainwindow.cpp textfilelogger.cpp stringlistmodel.cpp sqlite3.c \
+SOURCES += globalhotkey.cpp main.cpp mainwindow.cpp textfilelogger.cpp sqlite3.c \
     sqlite.cpp \
     sqlitetable.cpp \
-    notemodel.cpp \
-    tagmodel.cpp \
     notetable.cpp \
     databaseconnection.cpp \
     sqlitequery.cpp \
     presenter.cpp \
-    notesuimodel.cpp
+    notesuimodel.cpp \
+    notesmanager.cpp \
+    notedto.cpp \
+    tagdto.cpp \
+    tagtable.cpp \
+    tagsmanager.cpp \
+    tagsuimodel.cpp
 # QMAKE_CXXFLAGS += -std=c++0x
 QMAKE_CXXFLAGS += -std=gnu++0x
 

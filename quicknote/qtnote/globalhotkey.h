@@ -10,15 +10,17 @@ class GlobalHotKey : public QObject {
 
 public:
 	explicit GlobalHotKey();
-	bool Register(WId handle);
-	static bool EventFilter(void *message);
+    GlobalHotKey& operator=(const GlobalHotKey&) = delete;    // disallow copy assignment
+    GlobalHotKey(const GlobalHotKey&) = delete;    // disallow copy
+    bool registerHotkeys(WId handle);
+    static bool eventFilter(void *message);
 
 signals:
-	void HotKeyPressed(uint keyId, uint modifiers);
+    void hotKeyPressed(uint keyId, uint modifiers);
 
 private:
-    static QAbstractEventDispatcher::EventFilter prevEventFilter;	// what is this good for?
-    static GlobalHotKey* instance;
+    static QAbstractEventDispatcher::EventFilter prevEventFilter_;	// what is this good for?
+    static GlobalHotKey *instance_;
 
 };
 

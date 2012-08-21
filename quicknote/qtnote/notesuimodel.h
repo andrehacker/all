@@ -2,8 +2,18 @@
 #define NOTESUIMODEL_H
 #include <vector>
 #include <QAbstractListModel>
-#include "notemodel.h"
+#include "NoteDTO.h"
 
+// Required to store NoteDTO in QVariant
+Q_DECLARE_METATYPE(NoteDto)
+
+/*
+  UI Model holding a list of NoteDto objects.
+  Views are attached to this model and show the content.
+
+  TODO: Remove the additional notes_ vector and replace with the built in!
+  Otherwise sorting probably won't work
+*/
 class NotesUiModel : public QAbstractListModel
 {
 public:
@@ -18,14 +28,14 @@ public:
     bool removeRows(const int position, const int rows, const QModelIndex &index = QModelIndex());
 
     // custom methods
-    void updateNoteAt (const QModelIndex &noteIndex, const NoteModel &note);
-    void addNoteAt (const int position, const NoteModel &note);
-    void append (const NoteModel &note);
-    NoteModel getNote(const QModelIndex &index);
-    QModelIndex getIndexByNote(const NoteModel &note);
+    void updateNoteAt (const QModelIndex &noteIndex, const NoteDto &note);
+    void addNoteAt (const int position, const NoteDto &note);
+    void append (const NoteDto &note);
+    NoteDto getNote(const QModelIndex &index);
+    QModelIndex getIndexByNote(const NoteDto &note);
 
 private:
-    std::vector<NoteModel> notes_;
+    std::vector<NoteDto> notes_;
 };
 
 #endif // NOTESUIMODEL_H

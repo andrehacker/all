@@ -14,13 +14,13 @@ public:
     Sqlite& operator=(const Sqlite&) = delete;    // disallow copy
     Sqlite(const Sqlite&) = delete;    // disallow copy
     ~Sqlite();
-    const bool openExisting(const char *fileName);
-    const bool openOrCreate(const char *fileName);
+    const bool openExisting(const std::string &fileName);
+    const bool openOrCreate(const std::string &fileName);
     const bool close();
     const bool isOpen();
-    const int execDML(const std::string sql);
+    const int execDML(const std::string &sql);
     std::unique_ptr<SqliteQuery> execQuery(const std::string &sql);
-    std::unique_ptr<SqliteTable> getTable(const char *sql);
+    std::unique_ptr<SqliteTable> getTable(const std::string &sql);
     long long int getLastInsertId();
 
 private:

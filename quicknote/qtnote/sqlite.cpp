@@ -17,14 +17,14 @@ Sqlite::~Sqlite() {
     }
 }
 
-const bool Sqlite::openExisting(const char *fileName) {
+const bool Sqlite::openExisting(const std::string &fileName) {
     qDebug() << "Sqlite::openExisting";
     if (open_) {
         // don't allow to reopen implicitly
         return false;
     }
 
-    if (!sqlite3_open_v2(fileName, &db_, SQLITE_OPEN_READWRITE, 0) == SQLITE_OK) {
+    if (!sqlite3_open_v2(fileName.c_str(), &db_, SQLITE_OPEN_READWRITE, 0) == SQLITE_OK) {
         open_ = false;
         return false;
     }
@@ -32,14 +32,14 @@ const bool Sqlite::openExisting(const char *fileName) {
     return true;
 }
 
-const bool Sqlite::openOrCreate(const char *fileName) {
+const bool Sqlite::openOrCreate(const std::string &fileName) {
     qDebug() << "Sqlite::openOrCreate";
     if (open_) {
         // don't allow to reopen implicitly
         return false;
     }
 
-    if (!sqlite3_open_v2(fileName, &db_, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, 0) == SQLITE_OK) {
+    if (!sqlite3_open_v2(fileName.c_str(), &db_, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, 0) == SQLITE_OK) {
         open_ = false;
         return false;
     }
@@ -58,7 +58,7 @@ const bool Sqlite::isOpen() {
     return open_;
 }
 
-const int Sqlite::execDML(const std::string sql) {
+const int Sqlite::execDML(const std::string &sql) {
 
     qDebug() << "Sqlite::execDML: " << sql.c_str();
 
@@ -101,13 +101,13 @@ std::unique_ptr<SqliteQuery> Sqlite::execQuery(const std::string &sql) {
     }
 }
 
-std::unique_ptr<SqliteTable> Sqlite::getTable(const char *sql) {
-    qDebug() << "Sqlite::getTable: " << sql;
+std::unique_ptr<SqliteTable> Sqlite::getTable(const std::string &sql) {
+    qDebug() << "Sqlite::getTable: " << sql.c_str();
 
     char **result;
     int resultRows;
     int resultCols;
-    int ret = sqlite3_get_table(db_, sql, &result, &resultRows, &resultCols, 0);
+    int ret = sqlite3_get_table(db_, sql.c_str(), &result, &resultRows, &resultCols, 0);
 
     if (ret != SQLITE_OK) {
         return std::unique_ptr<SqliteTable>(0); //replace 0 with nullptr when available

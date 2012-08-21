@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon 20. Aug 13:01:03 2012
+** Created: Tue 21. Aug 14:32:38 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -49,6 +49,7 @@ public:
     QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
     QLineEdit *lineTitle;
+    QLineEdit *lineTags;
     QPlainTextEdit *textContent;
 
     void setupUi(QMainWindow *MainWindow)
@@ -72,7 +73,7 @@ public:
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout_2 = new QVBoxLayout(centralWidget);
-        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setSpacing(4);
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout = new QHBoxLayout();
@@ -119,9 +120,12 @@ public:
 
         splitter = new QSplitter(centralWidget);
         splitter->setObjectName(QString::fromUtf8("splitter"));
+        splitter->setLineWidth(1);
         splitter->setOrientation(Qt::Horizontal);
+        splitter->setHandleWidth(5);
         listTags = new QListView(splitter);
         listTags->setObjectName(QString::fromUtf8("listTags"));
+        listTags->setFrameShape(QFrame::NoFrame);
         listTags->setFrameShadow(QFrame::Raised);
         listTags->setSelectionMode(QAbstractItemView::ExtendedSelection);
         splitter->addWidget(listTags);
@@ -139,7 +143,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(lineSearch->sizePolicy().hasHeightForWidth());
         lineSearch->setSizePolicy(sizePolicy1);
-        lineSearch->setStyleSheet(QString::fromUtf8("padding-right: 20px; padding-left: 2px; background: url(:/files/res/glyphicons_027_search_16px.png); background-position: right; background-repeat: no-repeat; border: 1px solid white;border-radius: 10px"));
+        lineSearch->setStyleSheet(QString::fromUtf8("padding-right: 20px; padding-left: 2px; background: url(:/files/res/glyphicons_027_search_14px.png); background-position: right; background-repeat: no-repeat; border: 1px solid white;border-radius: 10px"));
         lineSearch->setFrame(false);
         lineSearch->setPlaceholderText(QString::fromUtf8("Search"));
 
@@ -147,7 +151,13 @@ public:
 
         listResult = new QListView(layoutWidget);
         listResult->setObjectName(QString::fromUtf8("listResult"));
+        QFont font;
+        font.setPointSize(9);
+        listResult->setFont(font);
+        listResult->setFrameShape(QFrame::NoFrame);
         listResult->setFrameShadow(QFrame::Raised);
+        listResult->setLineWidth(0);
+        listResult->setMidLineWidth(-1);
 
         verticalLayout_3->addWidget(listResult);
 
@@ -164,6 +174,12 @@ public:
         lineTitle->setFrame(false);
 
         verticalLayout->addWidget(lineTitle);
+
+        lineTags = new QLineEdit(layoutWidget1);
+        lineTags->setObjectName(QString::fromUtf8("lineTags"));
+        lineTags->setFrame(false);
+
+        verticalLayout->addWidget(lineTags);
 
         textContent = new QPlainTextEdit(layoutWidget1);
         textContent->setObjectName(QString::fromUtf8("textContent"));
