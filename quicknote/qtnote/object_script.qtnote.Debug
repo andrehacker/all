@@ -17,6 +17,7 @@ INPUT(
 ./debug/tagtable.o
 ./debug/tagsmanager.o
 ./debug/tagsuimodel.o
+./debug/settingsui.o
 ./debug/moc_mainwindow.o
 ./debug/moc_globalhotkey.o
 ./debug/qrc_res.o

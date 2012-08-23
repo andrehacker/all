@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QStringList>
+#include <QSystemTrayIcon>
+#include <memory>
 #include "tagsuimodel.h"
 #include "globalhotkey.h"
 #include "NoteDTO.h"
@@ -22,6 +24,7 @@ public:
     ~MainWindow();
 
     virtual void showEvent(QShowEvent *event);  // overwritten
+    virtual void closeEvent(QCloseEvent *event);
     static Ui::MainWindow *sui; // static version of ui, for globalhotkey
 
     // Event filter to detect FocusEvents for content
@@ -49,16 +52,24 @@ private slots:
     void titleEditingFinished();
     void tagsEditingFinished();
     void lineSearchTextChanged(const QString & text);
-    void HotKeyPressedSlot(uint keyId, uint modifiers);
+    void hotKeyPressed(uint keyId, uint modifiers);
+    // Tray Icon slots
+    void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
     
 private:
     // Helper methods
+    void restoreWindowFromTray();
+    void initTrayIcon();
     void selectNoteByRow(int row);
     NoteDto getSelectedNote();
 
     Presenter &presenter_;  // dependency - not our ownership
     Ui::MainWindow *ui_;    // null at beginning, will be initialized in constructor
 
+    QSystemTrayIcon trayIcon;
+    std::unique_ptr<QMenu> trayIconMenu;
+    std::unique_ptr<QAction> restoreAction;
+    std::unique_ptr<QAction> quitAction;
     GlobalHotKey globalHotKey_;
     QStringList tagsStringList_;
     TagsUiModel tagsUiModel_;

@@ -17,6 +17,7 @@ INPUT(
 ./release/tagtable.o
 ./release/tagsmanager.o
 ./release/tagsuimodel.o
+./release/settingsui.o
 ./release/moc_mainwindow.o
 ./release/moc_globalhotkey.o
 ./release/qrc_res.o

@@ -2,27 +2,538 @@
 Program started 
 Sqlite::openExisting 
 Registered Hotkeys
-Object::connect: No such signal GlobalHotKey::HotKeyPressed(uint, uint) in mainwindow.cpp:64
-Object::connect:  (receiver name: 'MainWindow')
 Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
 Sqlite::execQuery: Query returned >=1 rows 
 SqliteQuery: Finalizing Prepared Statement 
 Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
 Sqlite::execQuery: Query returned >=1 rows 
 SqliteQuery: Finalizing Prepared Statement 
+Presenter Destructor 
+MainWindow Destructor 
 Sqlite Destructor 
-Closing file
+Closing Debug Logfile
  
 Program started 
 Sqlite::openExisting 
 Registered Hotkeys
-Object::connect: No such signal GlobalHotKey::HotKeyPressed(uint, uint) in mainwindow.cpp:64
-Object::connect:  (receiver name: 'MainWindow')
 Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
 Sqlite::execQuery: Query returned >=1 rows 
 SqliteQuery: Finalizing Prepared Statement 
 Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
 Sqlite::execQuery: Query returned >=1 rows 
 SqliteQuery: Finalizing Prepared Statement 
+Regular click/Trigger 
+Regular click/Trigger 
+Regular click/Trigger 
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Regular click/Trigger 
+Regular click/Trigger 
+Presenter Destructor 
+MainWindow Destructor 
 Sqlite Destructor 
-Closing file
+Closing Debug Logfile
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Regular click/Trigger 
+Presenter Destructor 
+MainWindow Destructor 
+Sqlite Destructor 
+Closing Debug Logfile
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Regular click/Trigger 
+Regular click/Trigger 
+Regular click/Trigger 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%a%' OR content like '%a%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%as%' OR content like '%as%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%asd%' OR content like '%asd%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%as%' OR content like '%as%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%a%' OR content like '%a%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%d%' OR content like '%d%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%ds%' OR content like '%ds%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%d%' OR content like '%d%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%W%' OR content like '%W%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%We%' OR content like '%We%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%Wel%' OR content like '%Wel%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%Welc%' OR content like '%Welc%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%T%' OR content like '%T%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%Th%' OR content like '%Th%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%Thi%' OR content like '%Thi%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This%' OR content like '%This%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This %' OR content like '%This %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This i%' OR content like '%This i%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is%' OR content like '%This is%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is %' OR content like '%This is %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a%' OR content like '%This is a%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a %' OR content like '%This is a %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a s%' OR content like '%This is a s%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a se%' OR content like '%This is a se%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a sec%' OR content like '%This is a sec%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a seco%' OR content like '%This is a seco%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a secon%' OR content like '%This is a secon%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a second%' OR content like '%This is a second%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a second %' OR content like '%This is a second %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a second n%' OR content like '%This is a second n%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a second no%' OR content like '%This is a second no%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a second not%' OR content like '%This is a second not%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a second note%' OR content like '%This is a second note%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a second %' OR content like '%This is a second %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is a %' OR content like '%This is a %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This is %' OR content like '%This is %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%This %' OR content like '%This %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Presenter Destructor 
+MainWindow Destructor 
+Sqlite Destructor 
+Closing Debug Logfile
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Presenter Destructor 
+MainWindow Destructor 
+Sqlite Destructor 
+Closing Debug Logfile
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execDML:  INSERT INTO notes (title, content, tags) VALUES ('', '', ''); 
+Key pressed: 16777223
+Sqlite::execDML:  UPDATE notes SET deleted=1 WHERE ID = 4; 
+Regular click/Trigger 
+Regular click/Trigger 
+Selected Tags:  1 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND tags like '%,Personal,%' 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  1 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND tags like '%,DEV,%' 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  0 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Presenter Destructor 
+MainWindow Destructor 
+Sqlite Destructor 
+Closing Debug Logfile
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Presenter Destructor 
+MainWindow Destructor 
+Sqlite Destructor 
+Closing Debug Logfile
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Regular click/Trigger 
+Regular click/Trigger 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%A%' OR content like '%A%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%AS%' OR content like '%AS%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%A%' OR content like '%A%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%W%' OR content like '%W%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%We%' OR content like '%We%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%Wel%' OR content like '%Wel%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%Welc%' OR content like '%Welc%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%Welco%' OR content like '%Welco%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%t%' OR content like '%t%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%to%' OR content like '%to%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%to %' OR content like '%to %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%to s%' OR content like '%to s%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%to %' OR content like '%to %') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%to%' OR content like '%to%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%t%' OR content like '%t%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%th%' OR content like '%th%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%thi%' OR content like '%thi%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%thid%' OR content like '%thid%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%thi%' OR content like '%thi%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%th%' OR content like '%th%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%t%' OR content like '%t%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%s%' OR content like '%s%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%d%' OR content like '%d%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%a%' OR content like '%a%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%f%' OR content like '%f%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%g%' OR content like '%g%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  1 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND tags like '%,Personal,%' 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  1 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND tags like '%,DEV,%' 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Regular click/Trigger 
+Regular click/Trigger 
+Regular click/Trigger 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%a%' OR content like '%a%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%ad%' OR content like '%ad%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%ads%' OR content like '%ads%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%adss%' OR content like '%adss%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%s%' OR content like '%s%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%sd%' OR content like '%sd%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%s%' OR content like '%s%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%k%' OR content like '%k%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%k%' OR content like '%k%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%k%' OR content like '%k%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%l%' OR content like '%l%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%ll%' OR content like '%ll%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%l%' OR content like '%l%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%l%' OR content like '%l%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%l%' OR content like '%l%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%l%' OR content like '%l%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%ll%' OR content like '%ll%') 
+Sqlite::execQuery: Query returned no rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND (title like '%l%' OR content like '%l%') 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Presenter Destructor 
+MainWindow Destructor 
+Sqlite Destructor 
+Closing Debug Logfile
+ 
+Program started 
+Sqlite::openExisting 
+Registered Hotkeys
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Sqlite::execQuery:  SELECT id, name, notecount FROM tags 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  1 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND tags like '%,Personal,%' 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  1 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND tags like '%,DEV,%' 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  0 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  1 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 AND tags like '%,Personal,%' 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Selected Tags:  0 
+Sqlite::execQuery:  SELECT id, title, content, tags FROM notes where deleted=0 
+Sqlite::execQuery: Query returned >=1 rows 
+SqliteQuery: Finalizing Prepared Statement 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Sqlite::execDML:  INSERT INTO notes (title, content, tags) VALUES ('', '', ''); 
+Sqlite::execDML:  INSERT INTO notes (title, content, tags) VALUES ('', '', ''); 
+Sqlite::execDML:  INSERT INTO notes (title, content, tags) VALUES ('', '', ''); 
+Sqlite::execDML:  INSERT INTO notes (title, content, tags) VALUES ('', '', ''); 
+Key pressed: 16777223
+Sqlite::execDML:  UPDATE notes SET deleted=1 WHERE ID = 8; 
+Key pressed: 16777223
+Sqlite::execDML:  UPDATE notes SET deleted=1 WHERE ID = 7; 
+Key pressed: 16777223
+Sqlite::execDML:  UPDATE notes SET deleted=1 WHERE ID = 6; 
+Key pressed: 16777223
+Sqlite::execDML:  UPDATE notes SET deleted=1 WHERE ID = 5; 
+Key pressed: 16777237
+Key pressed: 16777237
+Key pressed: 16777235
+Signaled HotKeyPressed. key:  70  mod:  5 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Signaled HotKeyPressed. key:  70  mod:  5 
+Presenter Destructor 
+MainWindow Destructor 
+Sqlite Destructor 
+Closing Debug Logfile

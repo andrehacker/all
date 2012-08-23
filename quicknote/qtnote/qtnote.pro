@@ -22,7 +22,8 @@ HEADERS += abstractview.h mainwindow.h textfilelogger.h sqlite3.h \
     tagdto.h \
     tagtable.h \
     tagsmanager.h \
-    tagsuimodel.h
+    tagsuimodel.h \
+    settingsui.h
 FORMS += mainwindow.ui
 SOURCES += globalhotkey.cpp main.cpp mainwindow.cpp textfilelogger.cpp sqlite3.c \
     sqlite.cpp \
@@ -37,7 +38,8 @@ SOURCES += globalhotkey.cpp main.cpp mainwindow.cpp textfilelogger.cpp sqlite3.c
     tagdto.cpp \
     tagtable.cpp \
     tagsmanager.cpp \
-    tagsuimodel.cpp
+    tagsuimodel.cpp \
+    settingsui.cpp
 # QMAKE_CXXFLAGS += -std=c++0x
 QMAKE_CXXFLAGS += -std=gnu++0x
 

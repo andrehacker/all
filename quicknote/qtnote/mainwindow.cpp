@@ -3,12 +3,14 @@
 #include <QStringListModel>
 #include <QStringList>
 #include <QDebug>
+#include <QMenu>
 #include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "tagsuimodel.h"
 #include "globalhotkey.h"
 #include "presenter.h"
+#include "settingsui.h"
 
 Ui::MainWindow *MainWindow::sui = 0;
 
@@ -50,6 +52,9 @@ MainWindow::MainWindow(Presenter &presenter, QWidget *parent) :
             this, SLOT(titleEditingFinished()));
     connect(ui_->lineTags, SIGNAL(editingFinished()),
             this, SLOT(tagsEditingFinished()));
+
+    initTrayIcon();
+
     // Set Event filter to get QFocusEvent for content field and for other events
     // This way we can avoid to subclass QPlainTextEdit
     ui_->textContent->installEventFilter(this);
@@ -61,12 +66,33 @@ MainWindow::MainWindow(Presenter &presenter, QWidget *parent) :
     } else {
         qDebug("Error registering Hotkeys");
     }
-    connect(&globalHotKey_, SIGNAL(HotKeyPressed(uint, uint)),
-        this, SLOT(HotKeyPressedSlot(uint, uint)));
+    connect(&globalHotKey_, SIGNAL(hotKeyPressed(uint, uint)),
+        this, SLOT(hotKeyPressed(uint, uint)));
+}
 
+void MainWindow::initTrayIcon() {
+    //connect(trayIcon, SIGNAL(messageClicked()), this, SLOT(messageClicked()));
+    connect(&trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+            this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
+    trayIcon.setIcon(QIcon(":/files/res/glyphicons_027_search.png"));
+
+    restoreAction = std::unique_ptr<QAction> (new QAction(tr("&Open Note"), this));
+    connect(restoreAction.get(), SIGNAL(triggered()), this, SLOT(showNormal()));
+    quitAction = std::unique_ptr<QAction> (new QAction(tr("&Quit"), this));
+    connect(quitAction.get(), SIGNAL(triggered()), qApp, SLOT(quit()));
+
+    trayIconMenu = std::unique_ptr<QMenu>(new QMenu(this));
+    trayIconMenu->addAction(restoreAction.get());
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(quitAction.get());
+    trayIcon.setContextMenu(trayIconMenu.get());
+
+    trayIcon.show();
 }
 
 MainWindow::~MainWindow() {
+    qDebug() << "MainWindow Destructor";
+    trayIcon.hide();
     delete ui_;
 }
 
@@ -84,10 +110,10 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
             ui_->textContent->document()->setModified(false);
         }
         return true;
-    } else if (event->type() == QEvent::KeyRelease && object == ui_->listResult) {
+    } else if (event->type() == QEvent::KeyRelease) {
         QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-        qDebug("Ate key press %d", keyEvent->key());
-        if (keyEvent->key() == Qt::Key_Delete) {
+        qDebug("Key pressed: %d", keyEvent->key());
+        if (object == ui_->listResult && keyEvent->key() == Qt::Key_Delete) {
             // Delete selected Note
             NoteDto note = getSelectedNote();
             presenter_.deleteNote(note);
@@ -98,11 +124,39 @@ bool MainWindow::eventFilter(QObject* object, QEvent* event)
     return QObject::eventFilter(object, event);
 }
 
-// override QWidgets showEvent
+// overwrite QWidgets showEvent
 void MainWindow::showEvent(QShowEvent *event) {
     QMainWindow::showEvent(event);
 
     ui_->lineSearch->setFocus();
+}
+
+// overwrite
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (trayIcon.isVisible()) {
+        if (SettingsUi::minimizedInfoAllowed()) {
+            trayIcon.showMessage("QNote", "QNote will keep running in background. "
+                                 "Click here to restore it, or choose Quit"
+                                 " in the context menu of the tray icon.");
+        }
+        hide();
+        event->ignore();
+    }
+}
+
+void MainWindow::trayIconActivated(QSystemTrayIcon::ActivationReason reason) {
+    switch (reason) {
+    case QSystemTrayIcon::Trigger:
+        qDebug() << "Regular click/Trigger";
+        restoreWindowFromTray();
+        break;
+    case QSystemTrayIcon::DoubleClick:
+        // Trigger event was handled before. Ignore this second click.
+        break;
+    default:
+    ;
+    }
 }
 
 void MainWindow::resultCurrentChanged() {
@@ -177,13 +231,17 @@ void MainWindow::tagsEditingFinished() {
     }
 }
 
-void MainWindow::HotKeyPressedSlot(uint keyId, uint modifiers) {
+void MainWindow::hotKeyPressed(uint keyId, uint modifiers) {
     std::stringstream s;
     s << "Received WM_HOTKEY. key:" << keyId << " modifiers: " << modifiers;
     //ui->textEditLog->appendPlainText(s.str().c_str());
 
+    restoreWindowFromTray();
+}
+
+void MainWindow::restoreWindowFromTray() {
     ui_->lineSearch->setText("");
-    
+
     // Activate window
     showNormal();
     activateWindow();

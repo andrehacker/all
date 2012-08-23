@@ -19,7 +19,11 @@ Presenter::Presenter() :
     }
 
     // Create View. Done here because we need to pass a pointer to presenter.
-    view_ = std::unique_ptr<AbstractView>(new MainWindow(*this));
+    // TODO: Custom deleter is required to make sure that the Desctructor of
+    // derived class (MainWindow) is called
+    // view_ = std::unique_ptr<AbstractView, void(*)(void*)>(new MainWindow(*this), customDeleterForDerived);
+    //view_ = std::unique_ptr<AbstractView>(new MainWindow(*this));
+    view_ = new MainWindow(*this);
     view_->showWindow();
 
     // Populate GUI with initial data
@@ -30,6 +34,11 @@ Presenter::Presenter() :
     view_->updateTags(tags);
 
     // TODO: Subscribe to model for changes (e.g. after sync). Update UI afterwards
+}
+
+Presenter::~Presenter() {
+    qDebug() << "Presenter Destructor";
+    delete static_cast<MainWindow *>(view_);
 }
 
 void Presenter::optionsClicked() {
@@ -96,7 +105,9 @@ void Presenter::tagSelectionChanged() {
     qDebug() << "Selected Tags: " << selectedTags.size();
 
     // Update search result according to selected tags and search filter
-    std::vector<NoteDto> notes = notesManager_.getNotes(view_->getSearchFilter(),selectedTags);
+    std::vector<NoteDto> notes = notesManager_.getNotes(
+                view_->getSearchFilter(),
+                selectedTags);
     view_->updateNotes(notes);
 }
 

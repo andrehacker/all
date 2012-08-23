@@ -14,6 +14,7 @@ public:
     Presenter();
     Presenter& operator=(const Presenter&) = delete;    // disallow copy/assignment
     Presenter(const Presenter&) = delete;    // disallow copy
+    ~Presenter();
 
     void optionsClicked();
     void newNoteClicked();
@@ -30,10 +31,16 @@ public:
     void tagSelectionChanged();
 
 private:
-    std::unique_ptr<AbstractView> view_;
+    //std::unique_ptr<AbstractView> view_;
+    AbstractView *view_;
     DatabaseConnection db_;
     NotesManager notesManager_;
     TagsManager tagsManager_;
+
+    template <typename Derived>
+    static void customDeleterForDerived(void *p) {
+        delete static_cast<Derived>(p);
+    }
 };
 
 #endif // PRESENTER_H

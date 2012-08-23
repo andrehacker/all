@@ -9,7 +9,7 @@ TextFileLogger::TextFileLogger(const std::string &filename) {
 }
 
 TextFileLogger::~TextFileLogger() {
-	logfile << "Closing file" << std::endl;
+    logfile << "Closing Debug Logfile" << std::endl;
 	logfile.close();
 }
 

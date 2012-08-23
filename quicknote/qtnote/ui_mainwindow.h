@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue 21. Aug 14:32:38 2012
+** Created: Tue 21. Aug 19:11:35 2012
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -132,7 +132,7 @@ public:
         layoutWidget = new QWidget(splitter);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
         verticalLayout_3 = new QVBoxLayout(layoutWidget);
-        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setSpacing(4);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -165,7 +165,7 @@ public:
         layoutWidget1 = new QWidget(splitter);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
         verticalLayout = new QVBoxLayout(layoutWidget1);
-        verticalLayout->setSpacing(6);
+        verticalLayout->setSpacing(4);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -183,6 +183,7 @@ public:
 
         textContent = new QPlainTextEdit(layoutWidget1);
         textContent->setObjectName(QString::fromUtf8("textContent"));
+        textContent->setFrameShape(QFrame::NoFrame);
         textContent->setFrameShadow(QFrame::Raised);
 
         verticalLayout->addWidget(textContent);
